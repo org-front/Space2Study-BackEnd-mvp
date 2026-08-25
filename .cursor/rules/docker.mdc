@@ -6,8 +6,8 @@ alwaysApply: false
 
 # Docker (dev)
 
-- Image: `node:18.14.2-alpine`, `npm ci --only=dev --force`, `USER node`, `CMD npm start`, port `8080`.
-- Compose: `server` + `mongo` on `s2s-network`. Host ports `8080` and `27017`. Compose sets `MONGODB_URL=mongodb://db:27017`.
-- Do not add `npm@latest`, a second production stage, nginx, or drop the Mongo service.
+- One stage: `node:18.14.2-alpine`, `ENV HUSKY=0`, `npm ci`, `CMD npm start`, port `8080`.
+- Compose: `server` + `mongo:6`. Host ports `8080` and `27017`. Compose sets `MONGODB_URL=mongodb://db:27017/space2study`.
+- Do not add `npm i --force`, `npm@latest`, `npm ci --only=dev`, a second production stage, nginx, or an external `s2s-network`.
 - JWT / mail / Azure still need dotenv (`.env` / `.env.local`). Compose does not inject them today.
-- Keep Husky from running inside the image if you touch the Dockerfile (`HUSKY=0` is fine).
+- CI Docker job only **builds** (`backend:test`, `push: false`). Do not log in to `s2sstage.azurecr.io` or restore `azure-pipeline.yaml`.

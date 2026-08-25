@@ -34,9 +34,9 @@ Do not use `@modelcontextprotocol/server-github` (deprecated). Do not add Playwr
 ## Git and CI
 
 - Do not change ESLint `linebreak-style` or rewrite line endings unless asked.
-- CI (`.github/workflows/main.yaml`): MongoDB service, `npm test` (coverage for Sonar), Docker build. Do not rebind Sonar/CI to `ita-social-projects`.
+- CI (`.github/workflows/main.yaml`): Mongo 6 service, `npm ci`, `npm test` (coverage for Sonar), local Docker build (`push: false`). Sonar runs only if `SONAR_TOKEN` is set. Keys in `sonar-project.properties` stay `CHANGE_ME` until students create their own SonarCloud project.
 - Pre-commit: lint-staged on staged `*.js`. Pre-push: `npm test`.
-- Docker is a **dev** image (`npm start` + Mongo in Compose), not a production multi-stage build.
+- Docker is a **dev** image (`npm start` + Mongo in Compose), not a production multi-stage build. Do not restore `azure-pipeline.yaml` or push to the original ACR.
 
 ## Stack facts the model often gets wrong
 

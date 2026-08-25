@@ -76,7 +76,7 @@ Command Palette: `MCP: List Servers`. Якщо `github` червоний — н�
 | Рев’ю коду | Cursor: `/review-bugbot` або `/review-security`. VS Code: Copilot Agent по diff | CodeRabbit MCP |
 | Невикористані імпорти | `npm run lint` (pre-commit + CI) | Окремий MCP |
 | Мертві файли / експорти / залежності | `npx knip@5` (лише звіт) | `@knip/mcp` (потрібен Node 20, у нас 18) |
-| Lint + тести з coverage | Pre-push (`npm test`) + GitHub Actions | Окремий review MCP |
+| Lint + тести з coverage | Pre-push (`npm test`) + GitHub Actions (Sonar лише з `SONAR_TOKEN`) | Окремий review MCP, Azure pipeline оригіналу |
 
 ## Як питати агента
 

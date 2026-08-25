@@ -3,37 +3,23 @@ services:
     container_name: server
     build:
       context: .
+      dockerfile: Dockerfile
     environment:
-      - MONGODB_URL=mongodb://db:27017
+      HUSKY: "0"
+      MONGODB_URL: mongodb://db:27017/space2study
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - db
-    networks:
-      - s2s-network
-  
+
   db:
     container_name: db
-    image: mongo
+    image: mongo:6
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - db-data:/data/db
-    expose:
-      - 27017
-    healthcheck:
-      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - s2s-network
-    
+
 volumes:
   db-data:
-
-networks:
-  s2s-network:
-    name: s2s-network
-    driver: bridge

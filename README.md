@@ -107,7 +107,9 @@ Dev containers: API on `http://localhost:8080`, Mongo on `27017`. Swagger UI: `h
 docker compose up --build
 ```
 
-Compose injects `MONGODB_URL=mongodb://db:27017` into the server container. JWT, mail, and Azure values still come from dotenv files copied into the image — keep a local `.env` / `.env.local` next to `compose.yaml` when you run Compose.
+Compose injects `MONGODB_URL=mongodb://db:27017/space2study` into the server container. JWT, mail, and Azure values still come from dotenv files — keep a local `.env` / `.env.local` next to `compose.yaml` when you run Compose.
+
+CI builds the image as `backend:test` and does not push it. SonarCloud is a student stub (`CHANGE_ME` in `sonar-project.properties`); the scan step runs only when `SONAR_TOKEN` is set.
 
 ## Agents and MCP
 

@@ -12,6 +12,7 @@ This is an Express 4 + Mongoose 6 REST API (`develop`). Follow `AGENTS.md` for t
 - Tests: Jest 28 + Supertest. Integration uses `src/test/setup.js` (real Mongo). Coverage 80%
 - Node 18. Do not change ESLint `linebreak-style` unless asked
 - Docker is `npm start` + Mongo in Compose, not a production nginx/multi-stage image
+- Sonar keys in `sonar-project.properties` stay `CHANGE_ME`. CI scan runs only with `SONAR_TOKEN`. Do not point CI at `ita-social-projects`
 
 ## MCP (`.vscode/mcp.json`)
 
