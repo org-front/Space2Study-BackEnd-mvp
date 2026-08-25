@@ -1,0 +1,13 @@
+---
+description: Dev Docker image — API + Mongo, not a broken multi-stage prod build
+globs: Dockerfile,compose.yaml,.dockerignore
+alwaysApply: false
+---
+
+# Docker (dev)
+
+- Image: `node:18.14.2-alpine`, `npm ci --only=dev --force`, `USER node`, `CMD npm start`, port `8080`.
+- Compose: `server` + `mongo` on `s2s-network`. Host ports `8080` and `27017`. Compose sets `MONGODB_URL=mongodb://db:27017`.
+- Do not add `npm@latest`, a second production stage, nginx, or drop the Mongo service.
+- JWT / mail / Azure still need dotenv (`.env` / `.env.local`). Compose does not inject them today.
+- Keep Husky from running inside the image if you touch the Dockerfile (`HUSKY=0` is fine).

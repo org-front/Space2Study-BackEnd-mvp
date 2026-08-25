@@ -23,6 +23,8 @@ REST API of an educational marketplace: students look for tutors, tutors publish
 
 The source is CommonJS JavaScript. Path alias `~/` → `src/` (`module-alias`).
 
+How to use Cursor Agent, VS Code Copilot Agent, Bugbot, and MCP: [docs/agents.md](docs/agents.md) (Ukrainian). Cursor rules: `AGENTS.md` + `.cursor/rules/`. VS Code: `.github/copilot-instructions.md` + `.vscode/mcp.json`. Claude Code: `CLAUDE.md` + `.mcp.json`.
+
 Working branch: `develop`.
 
 ## Requirements
@@ -106,6 +108,37 @@ docker compose up --build
 ```
 
 Compose injects `MONGODB_URL=mongodb://db:27017` into the server container. JWT, mail, and Azure values still come from dotenv files copied into the image — keep a local `.env` / `.env.local` next to `compose.yaml` when you run Compose.
+
+## Agents and MCP
+
+Student guide: [docs/agents.md](docs/agents.md).
+
+| Editor | Instructions | MCP |
+| --- | --- | --- |
+| Cursor | `AGENTS.md`, `.cursor/rules/*.mdc` | `.cursor/mcp.json` |
+| VS Code + Copilot Agent | `.github/copilot-instructions.md` | `.vscode/mcp.json` |
+| Claude Code CLI | `CLAUDE.md` (`@AGENTS.md`) | `.mcp.json` |
+
+Restart the editor or CLI after pulling MCP changes. In VS Code open Copilot Chat in **Agent** mode (`chat.mcp.enabled` is on in `.vscode/settings.json`). Claude Code: run `claude` in the repo root and approve `.mcp.json` servers on first use.
+
+| Server | What it is for | Auth |
+| --- | --- | --- |
+| `context7` | Version-specific docs (Express 4, Mongoose 6, Jest 28, …) | Optional `CONTEXT7_API_KEY` |
+| `github` | Issues, PRs, Actions | `GITHUB_PERSONAL_ACCESS_TOKEN` or `/add-plugin github` |
+| `chrome-devtools` | Live Chrome: network, console, Swagger on `:8080` | Local Chrome |
+| Built-in Browser | Cursor Agent click-through on `:8080/api-docs` | Enable in Cursor Agent tools |
+
+**Not MCP (on purpose).** Code review: Cursor Bugbot / Security Review. Unused imports: `npm run lint`. Dead files/exports/deps: `npx knip@5` (Node 18). Official `@knip/mcp` needs Node 20+, so it is not in this repo.
+
+Do not add Playwright MCP or MUI MCP. Do not put tokens in JSON files. Do not drive the same page with Browser and Chrome DevTools at once.
+
+**GitHub token** (skip this if you use `/add-plugin github`):
+
+```powershell
+[System.Environment]::SetEnvironmentVariable("GITHUB_PERSONAL_ACCESS_TOKEN", "ghp_your_token", "User")
+```
+
+Then restart the editor. Never commit a GitHub PAT. `@modelcontextprotocol/server-github` is deprecated — this repo does not use it. In Cursor you can skip the env var and use `/add-plugin github`.
 
 ## Project structure
 
