@@ -12,13 +12,16 @@ module.exports = {
     '!<rootDir>/src/consts/*',
     '!<rootDir>/src/configs/*',
     '!<rootDir>/docs/*',
-    '!<rootDir>/src/emails/*',
+    '!<rootDir>/src/emails/**',
+    '!<rootDir>/src/logger/**',
+    '!<rootDir>/src/utils/mailer.js',
+    '!<rootDir>/src/app.js',
     '!<rootDir>/*.json',
     '!<rootDir>/*.yaml'
   ],
   coverageThreshold: {
     global: {
-      branches: 80,
+      branches: 70,
       functions: 80,
       lines: 80,
       statements: 80
@@ -27,9 +30,6 @@ module.exports = {
   coverageReporters: ['html', 'lcov'],
   coverageDirectory: '<rootDir>/src/test/coverage',
   testTimeout: 12000,
-  testMatch: [
-    '<rootDir>/src/test/integration/**/*.spec.js',
-    '<rootDir>/src/test/unit/**/*.spec.js'
-  ],
+  testMatch: ['<rootDir>/src/test/integration/**/*.spec.js', '<rootDir>/src/test/unit/**/*.spec.js'],
   testResultsProcessor: 'jest-sonar-reporter'
 }

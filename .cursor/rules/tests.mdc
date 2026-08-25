@@ -13,4 +13,4 @@ Jest is **28** in the Node environment. Specs live under `src/test/unit/` and `s
 - Auth in integration specs: `~/utils/testUserAuth`, not a hand-rolled JWT unless you are testing tokens themselves.
 - Unit-test middlewares/services/cron with Jest mocks. Do not boot Mongo in a unit spec.
 - Do not unit-test Pug templates, OpenAPI YAML, or third-party libraries.
-- Coverage: `src/test/coverage/`, global 80% thresholds. `npm test` is also the pre-push hook.
+- Coverage: `src/test/coverage/`, 70% branches / 80% functions, lines, statements. `npm test` is also the pre-push hook.

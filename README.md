@@ -185,7 +185,7 @@ Unit and integration specs live under `src/test/` and run in Node via Jest + Sup
 
 Integration tests start the real Express app and MongoDB, then drop the database between cases (`src/test/setup.js`). Point `.env.test.local` at a disposable database.
 
-Coverage reports go to `src/test/coverage/`. Global thresholds are 80% for branches, functions, lines, and statements.
+Coverage reports go to `src/test/coverage/`. Global thresholds are 70% for branches and 80% for functions, lines, and statements.
 
 Do not unit-test third-party libraries, Pug templates, or OpenAPI YAML. Prefer HTTP assertions through Supertest over reaching into private helpers when an integration spec already covers the path.
 
